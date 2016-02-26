@@ -26,7 +26,7 @@
 
 /* Begin PBXFileReference section */
 		4C0AAF9C1C779BC400184B6E /* Project3 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Project3; sourceTree = BUILT_PRODUCTS_DIR; };
-		4CECB5151C77B62900E995F2 /* project3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = project3.cpp; sourceTree = "<group>"; usesTabs = 0; };
+		4CECB5151C77B62900E995F2 /* project3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = project3.cpp; sourceTree = "<group>"; usesTabs = 0; wrapsLines = 1; };
 		4CECB5171C77B6B300E995F2 /* lexer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lexer.c; sourceTree = "<group>"; };
 		4CECB5181C77B6B300E995F2 /* lexer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lexer.h; sourceTree = "<group>"; };
 		4CECB53B1C77EEFF00E995F2 /* nonTerminalRule.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = nonTerminalRule.cpp; sourceTree = "<group>"; };

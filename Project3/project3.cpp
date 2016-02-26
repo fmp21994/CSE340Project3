@@ -21,7 +21,6 @@ void findFollowSets();
 bool isNonTerminal(string candidate);
 int getNonTerminalIndex(string nonTerminal);
 bool isEpsilon(int index);
-bool contains(vector<string> vect, string candidate);
 bool rightAreEpsilon(vector<string> rhs, int startIndex);
 int rightIsNotEpsilon(vector<string> rhs, int startIndex);
 int getIndexBeforeHash(vector<string>);
@@ -31,19 +30,18 @@ int main (int argc, char* argv[])
 {
     int task;
     
-            if (argc < 2)
-            {
-                printf("Error: missing argument\n");
-                return 1;
-            }
-
+    if (argc < 2)
+    {
+        printf("Error: missing argument\n");
+        return 1;
+    }
+    
     task = atoi(argv[1]);
-
     
     switch (task) {
         case 0:
         {
-            // TODO: Output information about the input grammar
+                // TODO: Output information about the input grammar
             
             parseGrammar();
             
@@ -61,7 +59,7 @@ int main (int argc, char* argv[])
         }
         case 1:
         {
-             /*TODO: Calculate FIRST sets for the input grammar
+            /*TODO: Calculate FIRST sets for the input grammar
              Hint: You better do the calculation in a function and call it here!
              TODO: Output the FIRST sets in the exact order and format required*/
             
@@ -89,7 +87,7 @@ int main (int argc, char* argv[])
         }
         case 2:
         {
-             /*TODO: Calculate FIRST sets for the input grammar
+            /*TODO: Calculate FIRST sets for the input grammar
              TODO: Calculate FOLLOW sets for the input grammar
              TODO: Output the FOLLOW sets in the exact order and format required*/
             parseGrammar();
@@ -131,7 +129,7 @@ void parseGrammar() {
         getToken();
         j++;
     }
-    // Parse the input into the data structure.
+        // Parse the input into the data structure.
     getToken();
     while (t_type != DOUBLEHASH) {
         while (t_type != HASH && t_type != DOUBLEHASH) {
@@ -141,7 +139,8 @@ void parseGrammar() {
                     if (t_type == ARROW) {
                         vector<string> temp;
                         getToken();
-                        while (t_type != HASH) {
+                        while (t_type != HASH)
+                        {
                             temp.push_back(current_token);
                             getToken();
                         }
@@ -181,7 +180,7 @@ void findFirstSets() {
         changed = false;
         for (int i = 0; i < (int)ruleSet.size(); i++)
         {
-            // Rule 2.
+                // Rule 2.
             for (int j = 0; j < (int)ruleSet[i].rhsVector.size(); j++)
             {
                 if (ruleSet[i].rhsVector[j].front() == "#") {
@@ -193,7 +192,7 @@ void findFirstSets() {
                     
                 }
             }
-            // Rule 1 & 3.
+                // Rule 1 & 3.
             for (int j = 0; j < (int)ruleSet[i].rhsVector.size(); j++)
             {
                 if (!isNonTerminal(ruleSet[i].rhsVector[j].front()))
@@ -222,7 +221,7 @@ void findFirstSets() {
                     }
                 }
             }
-            // rule 4 & 5.
+                // rule 4 & 5.
             for (int j = 0; j < (int)ruleSet[i].rhsVector.size(); j++)
             {
                 bool epsilonPrevious = true;
@@ -254,8 +253,8 @@ void findFirstSets() {
                     }
                     else if(epsilonPrevious)
                     {
-                    epsilonPrevious = false;
-                    it1 = find(ruleSet[i].firstSet.begin(), ruleSet[i].firstSet.end(), ruleSet[i].rhsVector[j][k]);
+                        epsilonPrevious = false;
+                        it1 = find(ruleSet[i].firstSet.begin(), ruleSet[i].firstSet.end(), ruleSet[i].rhsVector[j][k]);
                         if (it1 == ruleSet[i].firstSet.end()) {
                             ruleSet[i].firstSet.push_back(ruleSet[i].rhsVector[j][k]);
                             changed = true;
@@ -278,36 +277,40 @@ void findFollowSets() {
         changed = false;
         for (int i = 0; i < (int)ruleSet.size(); i++)
         {
-            // Rule 1.
+                // Rule 1.
             if (i == 0 && !setStart)
             {
                 ruleSet[i].followSet.push_back("$");
                 setStart = true;
                 changed = true;
             }
-            // Rule 2.
+                // Rule 2.
             for (int j = 0; j < (int)ruleSet[i].rhsVector.size(); j++)
             {
                 if ((int)ruleSet[i].rhsVector[j].size() > 0)
                 {
                     int kIndex = getIndexBeforeHash(ruleSet[i].rhsVector[j]);
-                    string back = ruleSet[i].rhsVector[j][kIndex];
-                    if (isNonTerminal(back)) {
-                        int index = (int)getNonTerminalIndex(ruleSet[i].rhsVector[j][kIndex]);
-                        for (int k = 0; k < (int)ruleSet[i].followSet.size(); k++)
+                    if(kIndex >= 0)
+                    {
+                        string back = ruleSet[i].rhsVector[j][kIndex];
+                        if (isNonTerminal(back))
                         {
-                            it1 = find(ruleSet[index].followSet.begin(), ruleSet[index].followSet.end(), ruleSet[i].followSet[k]);
-                            if (it1 == ruleSet[index].followSet.end())
+                            int index = (int)getNonTerminalIndex(ruleSet[i].rhsVector[j][kIndex]);
+                            for (int k = 0; k < (int)ruleSet[i].followSet.size(); k++)
                             {
-                                
-                                ruleSet[index].followSet.push_back(ruleSet[i].followSet[k]);
-                                changed = true;
+                                it1 = find(ruleSet[index].followSet.begin(), ruleSet[index].followSet.end(), ruleSet[i].followSet[k]);
+                                if (it1 == ruleSet[index].followSet.end())
+                                {
+                                    
+                                    ruleSet[index].followSet.push_back(ruleSet[i].followSet[k]);
+                                    changed = true;
+                                }
                             }
                         }
                     }
                 }
             }
-            // Rule 3.
+                // Rule 3.
             for (int j = 0; j < (int)ruleSet[i].rhsVector.size(); j++)
             {
                 bool previousEpsilon = true;
@@ -338,7 +341,7 @@ void findFollowSets() {
                     }
                 }
             }
-            // Rule 4.
+                // Rule 4.
             for (int j = 0; j < (int)ruleSet[i].rhsVector.size(); j++)
             {
                 for (int k = 0; k < (int)ruleSet[i].rhsVector[j].size(); k++)
@@ -347,6 +350,7 @@ void findFollowSets() {
                     {
                         if ((k+1) <= (int)ruleSet[i].rhsVector[j].size())
                         {
+                            
                             if (isNonTerminal(ruleSet[i].rhsVector[j][k+1]))
                             {
                                 int currentIndex = getNonTerminalIndex(ruleSet[i].rhsVector[j][k]);
@@ -369,13 +373,14 @@ void findFollowSets() {
                                 if (it1 == ruleSet[currentIndex].followSet.end() && ruleSet[i].rhsVector[j][k+1] != "#") {
                                     ruleSet[currentIndex].followSet.push_back(ruleSet[i].rhsVector[j][k+1]);
                                     changed = true;
+                                    
                                 }
                             }
                         }
                     }
                 }
             }
-            // Rule 5.
+                // Rule 5.
             for (int j = 0; j < (int)ruleSet[i].rhsVector.size(); j++)
             {
                 for (int k = 0; k < (int)ruleSet[i].rhsVector[j].size(); k++)
@@ -415,7 +420,7 @@ void findFollowSets() {
                 }
             }
         }
-       
+        
     }
 }
 
@@ -433,8 +438,7 @@ bool isEpsilon(int index) {
     iterator = find(ruleSet[index].firstSet.begin(), ruleSet[index].firstSet.end(), "#");
     if (iterator != ruleSet[index].firstSet.end()) {
         return true;
-    } else
-    {
+    } else {
         return false;
     }
     
@@ -457,8 +461,9 @@ int getNonTerminalIndex(string nonTerminal) {
     return -1;
 }
 
-bool rightAreEpsilon(vector<string> rhs, int startIndex) {
-    for (int i = startIndex + 1; rhs.size(); i++)
+bool rightAreEpsilon(vector<string> rhs, int startIndex)
+{
+    for (int i = startIndex + 1; i < (int)rhs.size(); i++)
     {
         if (isNonTerminal(rhs[i]))
         {
@@ -467,7 +472,7 @@ bool rightAreEpsilon(vector<string> rhs, int startIndex) {
                 return false;
             }
         }
-        else
+        else if (!isNonTerminal(rhs[i]) && rhs[i] != "#")
         {
             return false;
         }
@@ -480,12 +485,13 @@ int rightIsNotEpsilon(vector<string> rhs, int startIndex) {
     {
         if (isNonTerminal(rhs[i]))
         {
-            if (!isEpsilon(getNonTerminalIndex(rhs[i])))
+            int nonTerminalIndex =getNonTerminalIndex(rhs[i]);
+            if (!isEpsilon(nonTerminalIndex))
             {
                 return i;
             }
         }
-        else
+        else if (!isNonTerminal(rhs[i]))
         {
             return i;
         }
