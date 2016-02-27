@@ -16,7 +16,7 @@ class nonTerminalRule
 public:
     
     string nonTerminal;
-    vector<vector<string>> rhsVector;
+    vector<vector<string> > rhsVector;
     vector<string> firstSet;
     vector<string> followSet;
     
@@ -307,7 +307,6 @@ void findFollowSets()
     findFirstSets();
     auto changed = true;
     auto setStart = false;
-    vector<string>::iterator it1;
     
     while (changed)
     {
@@ -335,7 +334,7 @@ void findFollowSets()
                             auto index = static_cast<int>(getNonTerminalIndex(ruleSet[i].rhsVector[j][kIndex]));
                             for (auto k = 0; k < static_cast<int>(ruleSet[i].followSet.size()); k++)
                             {
-                                it1 = find(ruleSet[index].followSet.begin(), ruleSet[index].followSet.end(), ruleSet[i].followSet[k]);
+                                auto it1 = find(ruleSet[index].followSet.begin(), ruleSet[index].followSet.end(), ruleSet[i].followSet[k]);
                                 if (it1 == ruleSet[index].followSet.end())
                                 {
                                     ruleSet[index].followSet.push_back(ruleSet[i].followSet[k]);
@@ -361,7 +360,7 @@ void findFollowSets()
                                 auto index = getNonTerminalIndex(ruleSet[i].rhsVector[j][k]);
                                 for (auto l = 0; l < static_cast<int>(ruleSet[i].followSet.size()); l++)
                                 {
-                                    it1 = find(ruleSet[index].followSet.begin(), ruleSet[index].followSet.end(), ruleSet[i].followSet[l]);
+                                    auto it1 = find(ruleSet[index].followSet.begin(), ruleSet[index].followSet.end(), ruleSet[i].followSet[l]);
                                     if (it1 == ruleSet[index].followSet.end())
                                     {
                                         ruleSet[index].followSet.push_back(ruleSet[i].followSet[l]);
@@ -393,7 +392,7 @@ void findFollowSets()
                                 auto nextIndexFirstSetSize = static_cast<int>(ruleSet[nextIndex].firstSet.size());
                                 for (auto l = 0; l < nextIndexFirstSetSize; l++)
                                 {
-                                    it1 = find(ruleSet[currentIndex].followSet.begin(), ruleSet[currentIndex].followSet.end(), ruleSet[nextIndex].firstSet[l]);
+                                    auto it1 = find(ruleSet[currentIndex].followSet.begin(), ruleSet[currentIndex].followSet.end(), ruleSet[nextIndex].firstSet[l]);
                                     if (it1 == ruleSet[currentIndex].followSet.end() && ruleSet[nextIndex].firstSet[l] != "#")
                                     {
                                         ruleSet[currentIndex].followSet.push_back(ruleSet[nextIndex].firstSet[l]);
@@ -404,7 +403,7 @@ void findFollowSets()
                             else if (!isNonTerminal(ruleSet[i].rhsVector[j][k + 1]))
                             {
                                 auto currentIndex = getNonTerminalIndex(ruleSet[i].rhsVector[j][k]);
-                                it1 = find(ruleSet[currentIndex].followSet.begin(), ruleSet[currentIndex].followSet.end(), ruleSet[i].rhsVector[j][k + 1]);
+                                auto it1 = find(ruleSet[currentIndex].followSet.begin(), ruleSet[currentIndex].followSet.end(), ruleSet[i].rhsVector[j][k + 1]);
                                 if (it1 == ruleSet[currentIndex].followSet.end() && ruleSet[i].rhsVector[j][k + 1] != "#")
                                 {
                                     ruleSet[currentIndex].followSet.push_back(ruleSet[i].rhsVector[j][k + 1]);
@@ -432,7 +431,7 @@ void findFollowSets()
                                 auto nextIndexFirstSize = static_cast<int>(ruleSet[nextIndex].firstSet.size());
                                 for (auto l = 0; l < nextIndexFirstSize; l++)
                                 {
-                                    it1 = find(ruleSet[currentIndex].followSet.begin(), ruleSet[currentIndex].followSet.end(), ruleSet[nextIndex].firstSet[l]);
+                                    auto it1 = find(ruleSet[currentIndex].followSet.begin(), ruleSet[currentIndex].followSet.end(), ruleSet[nextIndex].firstSet[l]);
                                     if (it1 == ruleSet[currentIndex].followSet.end() && ruleSet[nextIndex].firstSet[l] != "#")
                                     {
                                         ruleSet[currentIndex].followSet.push_back(ruleSet[nextIndex].firstSet[l]);
@@ -443,7 +442,7 @@ void findFollowSets()
                             else if (!isNonTerminal(ruleSet[i].rhsVector[j][rightIndex]))
                             {
                                 auto currentIndex = getNonTerminalIndex(ruleSet[i].rhsVector[j][k]);
-                                it1 = find(ruleSet[currentIndex].followSet.begin(), ruleSet[currentIndex].followSet.end(), ruleSet[i].rhsVector[j][rightIndex]);
+                                auto it1 = find(ruleSet[currentIndex].followSet.begin(), ruleSet[currentIndex].followSet.end(), ruleSet[i].rhsVector[j][rightIndex]);
                                 if (it1 == ruleSet[currentIndex].followSet.end() && ruleSet[i].rhsVector[j][rightIndex] != "#")
                                 {
                                     ruleSet[currentIndex].followSet.push_back(ruleSet[i].rhsVector[j][rightIndex]);
