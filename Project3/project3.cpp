@@ -2,16 +2,34 @@
 #include <stdlib.h>
 #include <iostream>
 #include <algorithm>
-#include "nonTerminalRule.cpp"
+#include <vector>
+
+using namespace std;
 
 extern "C" {
 #include "lexer.h"
 }
 
-vector<nonTerminalRule> ruleSet;
+class nonTerminalRule {
+public:
+    
+    string nonTerminal;
+    int index;
+    vector<vector<string> > rhsVector;
+    vector<string> firstSet;
+    vector<string> followSet;
+    
+    nonTerminalRule(char* nonTerminal) {
+        this->nonTerminal = nonTerminal;
+    }
+    
+    void addRHS(vector<string> rhsVec) {
+        rhsVector.push_back(rhsVec);
+    }
+}; vector<nonTerminalRule> ruleSet;
+
 vector<string> nonTerminals;
 vector<string> terminals;
-
 
 void parseGrammar();
 void findTerminals();
@@ -24,16 +42,15 @@ bool rightAreEpsilon(vector<string> rhs, int startIndex);
 int rightIsNotEpsilon(vector<string> rhs, int startIndex);
 int getIndexBeforeHash(vector<string>);
 
-using namespace std;
 int main (int argc, char* argv[]) {
-    int task = 2;
+    int task;
     
-//    if (argc < 2) {
-//        printf("Error: missing argument\n");
-//        return 1;
-//    }
-//    
-//    task = atoi(argv[1]);
+    if (argc < 2) {
+        printf("Error: missing argument\n");
+        return 1;
+    }
+    
+    task = atoi(argv[1]);
     
     switch (task) {
         case 0: {
@@ -100,7 +117,6 @@ int main (int argc, char* argv[]) {
             break;
     }
     return 0;
-    
 }
 
 void parseGrammar() {

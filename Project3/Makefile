@@ -1,4 +1,4 @@
 
 All:
 	gcc -Wall -c lexer.c	
-	g++ -Wall lexer.o project3.cpp nonTerminalRule.cpp 
+	g++ -Wall lexer.o project3.cpp

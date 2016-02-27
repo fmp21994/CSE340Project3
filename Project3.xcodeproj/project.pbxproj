@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		4CECB5161C77B62900E995F2 /* project3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CECB5151C77B62900E995F2 /* project3.cpp */; };
 		4CECB5191C77B6B300E995F2 /* lexer.c in Sources */ = {isa = PBXBuildFile; fileRef = 4CECB5171C77B6B300E995F2 /* lexer.c */; };
-		4CECB53C1C77EEFF00E995F2 /* nonTerminalRule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CECB53B1C77EEFF00E995F2 /* nonTerminalRule.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,7 +28,6 @@
 		4CECB5151C77B62900E995F2 /* project3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = project3.cpp; sourceTree = "<group>"; usesTabs = 0; wrapsLines = 1; };
 		4CECB5171C77B6B300E995F2 /* lexer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lexer.c; sourceTree = "<group>"; };
 		4CECB5181C77B6B300E995F2 /* lexer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lexer.h; sourceTree = "<group>"; };
-		4CECB53B1C77EEFF00E995F2 /* nonTerminalRule.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = nonTerminalRule.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,7 +63,6 @@
 				4CECB5171C77B6B300E995F2 /* lexer.c */,
 				4CECB5181C77B6B300E995F2 /* lexer.h */,
 				4CECB5151C77B62900E995F2 /* project3.cpp */,
-				4CECB53B1C77EEFF00E995F2 /* nonTerminalRule.cpp */,
 			);
 			path = Project3;
 			sourceTree = "<group>";
@@ -128,7 +125,6 @@
 			files = (
 				4CECB5191C77B6B300E995F2 /* lexer.c in Sources */,
 				4CECB5161C77B62900E995F2 /* project3.cpp in Sources */,
-				4CECB53C1C77EEFF00E995F2 /* nonTerminalRule.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
